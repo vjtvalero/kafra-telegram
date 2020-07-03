@@ -25,6 +25,7 @@ const Reminder = {
                 }
             })
             .catch(error => telegram.reply(error.message))
+            .then(() => client.end())
     }
 }
 
