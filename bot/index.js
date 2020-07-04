@@ -6,13 +6,14 @@ const start = () => {
     const bot = new Telegraf(process.env.BOT_TOKEN)
     bot.start((context) => startMessage(context))
     bot.on('text', (context) => setReminder(context))
-    if (process.env.APP_ENV !== 'local') {
+    
+    if (process.env.APP_ENV === 'local') {
+        bot.telegram.deleteWebhook()
+        bot.startPolling()
+    } else {
         bot.telegram.setWebhook(`${process.env.WEBHOOK}/${process.env.SECRET}`)
         bot.startWebhook(`/${process.env.SECRET}`)
-    } else {
-        bot.telegram.deleteWebhook()
     }
-    // bot.startPolling()
 }
 
 module.exports = { start }
