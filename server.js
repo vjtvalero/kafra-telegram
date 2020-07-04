@@ -9,7 +9,7 @@ fastify.get('/', async () => {
     return { hello: 'Hello! I am Kafra.' }
 })
 fastify.register(require('./routes/reminder'))
-telegram.start()
+telegram.start(fastify)
 fastify.listen(PORT, host, err => {
     if (err) {
         fastify.log.error(err)
