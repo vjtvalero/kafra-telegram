@@ -7,14 +7,6 @@ const { defaultReplies } = require('./index')
 const witDateTimeKey = 'wit$datetime:datetime'
 const witActivityKey = 'wit$reminder:reminder'
 
-// start
-
-const newReminder = async () => {
-    return {
-        answer: 'Ok! I will remind you.'
-    }
-}
-
 const setReminder = async (context) => {
     const message = context.message.text
     const senderId = context.message.from.id.toString()
@@ -52,6 +44,5 @@ const setReminder = async (context) => {
 }
 
 module.exports = {
-    newReminder,
     setReminder
 }
