@@ -6,7 +6,7 @@ const config = {
     connectionString: process.env.DATABASE_URL
 }
 
-function getAndSendPendingReminders() {
+const getAndSendPendingReminders = function () {
     const client = new Client(config)
     client.connect()
     client.query("SELECT id, \"chatId\", activity FROM reminder WHERE TO_TIMESTAMP(CONCAT(date, ' ', time), 'YYYY-MM-DD HH24:MI:SS') <= CURRENT_TIMESTAMP ORDER BY \"createdAt\"")
@@ -41,3 +41,5 @@ function deleteReminderById(id) {
 }
 
 getAndSendPendingReminders()
+
+module.exports = { getAndSendPendingReminders }

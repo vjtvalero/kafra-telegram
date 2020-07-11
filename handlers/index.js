@@ -8,7 +8,7 @@ Ex.: Get lunch in 20mins`
 }
 
 const defaultReplies = {
-    unknownReminder: `Sorry.I don't understand this reminder.`
+    unknownReminder: `Sorry. I don't understand this reminder.`
 }
 
 module.exports = {
