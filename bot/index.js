@@ -12,6 +12,9 @@ const start = () => {
     // logic
     bot.start(async context => {
         await context.reply(startMessage(context.from.first_name))
+        await context.reply(`Your Chat Id: ${context.from.id}`)
+        await context.reply(`Group Chat Id: ${context.update.message.chat.id}
+Group Name: ${context.update.message.chat.title}`)
     })
     bot.on('text', (context) => setReminder(context))
 
