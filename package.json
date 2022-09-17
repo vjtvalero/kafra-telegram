@@ -5,9 +5,12 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon server",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "migrate": "node-pg-migrate",
-    "lwh": "lt -h 'http://serverless.social' -p 3000"
+    "prod:stop": "pm2 -s delete kafrabot || pm2 list",
+    "prod:clean": "rm -rf node_modules && rm -rf package-lock.json && npm install",
+    "prod:start": "pm2 start index.js --name kafrabot && pm2 save",
+    "prod": "npm run prod:stop && npm run prod:clean && npm run prod:start"
   },
   "author": "",
   "license": "ISC",
