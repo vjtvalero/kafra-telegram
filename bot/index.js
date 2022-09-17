@@ -19,12 +19,12 @@ const start = () => {
   bot.telegram
     .deleteWebhook()
     .then(() => {
-      const cron = require('node-cron');
-      const { getAndSendPendingReminders } = require('../jobs/sender');
-      cron.schedule('* * * * *', function () {
-        getAndSendPendingReminders();
-      });
       if (app === 'local') {
+        const cron = require('node-cron');
+        const { getAndSendPendingReminders } = require('../jobs/sender');
+        cron.schedule('* * * * *', function () {
+          getAndSendPendingReminders();
+        });
         bot.startPolling();
       } else {
         bot.telegram.setWebhook(`${process.env.WEBHOOK}/${process.env.SECRET}`).catch(console.error);
