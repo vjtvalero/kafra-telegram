@@ -17,6 +17,7 @@ const server = http.createServer((req, res) => {
   const parts = path.split('/').slice(1);
 
   if (parts[0] === 'remind') { // manually call in server (cron) if webhook is set
+    console.log('/remind accessed');
     getAndSendPendingReminders();
   }
 
