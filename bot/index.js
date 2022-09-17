@@ -11,7 +11,7 @@ const start = () => {
 
   // logic
   bot.start(async (context) => {
-    await context.reply(startMessage(context.from.first_name));
+    await context.reply(startMessage(context.from.first_name), { parse_mode: 'Markdown' });
   });
   bot.on('text', (context) => setReminder(context));
 

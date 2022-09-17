@@ -1,9 +1,9 @@
 const startMessage = (name) => {
     const message = `
 Hi ${name}! I'm Kafra.
-I can integrate your organization to my reminders.
-Give it a try by typing your first reminder.
-Ex.: Get lunch in 20mins`
+I can help you remember stuff.
+Give it a try by typing your first reminder:
+_Stand up and get a snack in 5mins_`
     return message
 }
 
