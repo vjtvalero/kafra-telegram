@@ -4,7 +4,7 @@ const { Telegraf } = require('telegraf');
 const { db } = require('../config/db');
 
 const getAndSendPendingReminders = async function () {
-  const query = `SELECT id, chat_id, activity FROM reminder WHERE TIMESTAMP(CONCAT(date, \' \', time), \'YYYY-MM-DD HH24:MI:SS\') <= CURRENT_TIMESTAMP ORDER BY created_at`;
+  const query = `SELECT id, chat_id, activity FROM reminder WHERE CONCAT(DATE, ' ', TIME) <= CURRENT_TIMESTAMP ORDER BY created_at`;
   const [rows] = await db.query(query);
   const result = JSON.parse(JSON.stringify(rows));
   if (result.length > 0) {
