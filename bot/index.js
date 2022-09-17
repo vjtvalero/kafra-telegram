@@ -30,7 +30,7 @@ const start = () => {
         bot.telegram.setWebhook(`${process.env.WEBHOOK}/${process.env.SECRET}`).catch(console.error);
         require('http')
           .createServer(bot.webhookCallback(`/${process.env.SECRET}`))
-          .listen(process.env.PORT);
+          .listen(8443);
       }
     })
     .catch(console.error);
