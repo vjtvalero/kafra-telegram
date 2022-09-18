@@ -21,7 +21,7 @@
     "node-pg-migrate": "^5.2.0",
     "node-wit": "^6.0.0",
     "pg": "^8.2.1",
-    "telegraf": "^3.38.0"
+    "telegraf": "^4.0.0"
   },
   "devDependencies": {
     "node-cron": "^2.0.3",

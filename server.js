@@ -1,9 +1,3 @@
-const dotenv = require('dotenv');
-dotenv.config();
-const telegram = require('./bot');
-telegram.start();
-// telegram ends here
-
 const http = require('http');
 const url = require('url');
 const { getAndSendPendingReminders } = require('./jobs/sender');
@@ -16,7 +10,8 @@ const server = http.createServer((req, res) => {
 
   const parts = path.split('/').slice(1);
 
-  if (parts[0] === 'remind') { // manually call in server (cron) if webhook is set
+  if (parts[0] === 'remind') {
+    // manually call in server (cron) if webhook is set
     console.log('/remind accessed');
     getAndSendPendingReminders();
   }
@@ -29,3 +24,8 @@ const server = http.createServer((req, res) => {
 server.listen(port, () => {
   console.log(`Server running`);
 });
+
+const dotenv = require('dotenv');
+dotenv.config();
+const telegram = require('./bot');
+telegram.start();
