@@ -1,5 +1,7 @@
 const http = require('http');
 const url = require('url');
+const dotenv = require('dotenv');
+dotenv.config();
 const { getAndSendPendingReminders } = require('./jobs/sender');
 
 const port = process.env.PORT;
@@ -25,7 +27,5 @@ server.listen(port, () => {
   console.log(`Server running`);
 });
 
-const dotenv = require('dotenv');
-dotenv.config();
 const telegram = require('./bot');
 telegram.start();

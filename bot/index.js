@@ -1,18 +1,10 @@
 const { Telegraf } = require('telegraf');
 const { startMessage } = require('../handlers/index');
 const { setReminder } = require('../handlers/reminder');
-const app = process.env.APP_ENV || 'local';
+const app = process.env.APP_ENV;
 
 const start = () => {
-  let args = {
-    telegram: {
-      apiRoot: `${process.env.WEBHOOK_URL}`,
-    },
-  };
-  if (app === 'local') {
-    args = {};
-  }
-  const bot = new Telegraf(process.env.BOT_TOKEN, args);
+  const bot = new Telegraf(process.env.BOT_TOKEN);
 
   // logic
   bot.start(async (context) => {
@@ -20,6 +12,7 @@ const start = () => {
   });
   bot.on('text', (context) => setReminder(context));
 
+  let options = {};
   // webhook
   if (app === 'local') {
     const cron = require('node-cron');
@@ -27,12 +20,20 @@ const start = () => {
     cron.schedule('* * * * *', function () {
       getAndSendPendingReminders();
     });
-    bot.launch();
-
-    // Enable graceful stop
-    process.once('SIGINT', () => bot.stop('SIGINT'));
-    process.once('SIGTERM', () => bot.stop('SIGTERM'));
+  } else {
+    options = {
+      webhook: {
+        domain: process.env.WEBHOOK_URL,
+        port: process.env.PORT,
+      },
+    };
   }
+
+  bot.launch(options);
+
+  // Enable graceful stop
+  process.once('SIGINT', () => bot.stop('SIGINT'));
+  process.once('SIGTERM', () => bot.stop('SIGTERM'));
 };
 
 module.exports = { start };
