@@ -24,7 +24,7 @@ const start = () => {
     options = {
       webhook: {
         domain: process.env.WEBHOOK_URL,
-        port: process.env.PORT,
+        port: 8443,
       },
     };
   }
