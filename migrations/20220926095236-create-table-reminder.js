@@ -22,7 +22,7 @@ exports.up = function (db) {
     time: 'time',
     activity: 'text',
     frequency: { type: 'string', length: 255 },
-    created_at: { type: 'timestamp', default: 'CURRENT_TIMESTAMP' },
+    created_at: { type: 'timestamp', defaultValue: 'CURRENT_TIMESTAMP' },
   });
 };
 
