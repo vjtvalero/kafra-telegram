@@ -10,7 +10,7 @@ const getAndSendPendingReminders = async function () {
   if (result.length > 0) {
     const bot = new Telegraf(process.env.BOT_TOKEN);
     for (const row of result) {
-      await bot.telegram.sendMessage(row.chat_id, `It's time to _${row.activity}_.`, {
+      await bot.telegram.sendMessage(row.chat_id, `⏱ ${row.activity}`, {
         parse_mode: 'Markdown',
       });
       await deleteReminderById(row.id);
