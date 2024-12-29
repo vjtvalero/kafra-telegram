@@ -1,9 +1,8 @@
-const moment = require('moment-timezone');
+const moment = require('moment');
 const { db } = require('../config/db');
 
 const Reminder = {
   create: async function ({ telegram, senderId, date, time, activity } = {}) {
-    moment.tz.setDefault('Asia/Manila');
     const query = `INSERT INTO reminder (chat_id, date, time, activity) VALUES(?, ?, ?, ?)`;
     const args = [senderId, moment(date).format('YYYY-MM-DD'), moment(time).format('HH:mm:ss'), activity];
     const row = await db.query(query, args);
